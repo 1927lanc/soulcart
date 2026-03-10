@@ -7,3 +7,5 @@ media/
 .env
 *.avif
 *.webp
+*.jpg
+*.png
