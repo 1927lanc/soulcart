@@ -1432,16 +1432,5 @@
     "is_active": true,
     "created_at": "2026-03-07T11:37:59.821Z"
   }
-},
-{
-  "model": "products.review",
-  "pk": 1,
-  "fields": {
-    "product": 3,
-    "user": 2,
-    "rating": 5,
-    "comment": "\"Amazing quality! The print is super vibrant and the fabric is really comfortable. Totally worth the price!\"",
-    "created_at": "2026-03-09T17:58:06.108Z"
-  }
 }
 ]
