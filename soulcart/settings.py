@@ -4,17 +4,15 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ✅ Use environment variable in production
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-this-key')
 
-# ✅ False in production
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# ✅ Allow Render + localhost
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '.onrender.com',
+    '.vercel.app',
 ]
 
 INSTALLED_APPS = [
@@ -24,13 +22,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Third party
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-
-    # Your apps
     'products',
     'cart',
     'orders',
@@ -40,7 +34,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Added for static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,7 +63,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'soulcart.wsgi.application'
 
-# ✅ PostgreSQL on Render, SQLite locally
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
@@ -89,7 +82,6 @@ TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 
-# ✅ Static files with WhiteNoise
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -99,14 +91,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ✅ CORS — allow your Vercel frontend
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://soulcart-frontend.vercel.app",  # update after Vercel deploy
-]
+# ✅ Allow all origins (fixes CORS for Vercel)
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -117,5 +105,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Custom User Model
 AUTH_USER_MODEL = 'users.User'
