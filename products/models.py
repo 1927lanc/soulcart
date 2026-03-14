@@ -34,7 +34,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     original_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    image = models.URLField(max_length=500, blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
