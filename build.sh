@@ -1,8 +1,11 @@
-#!/usr/bin/env bash
+ #!/usr/bin/env bash
 set -o errexit
+
+# Install dependencies
 pip install -r requirements.txt
-python manage.py collectstatic --no-input
+
+# Collect static files for Django Admin and other static assets
+python manage.py collectstatic --noinput
+
+# Apply database migrations
 python manage.py migrate
-python manage.py flush --no-input
-python manage.py loaddata products_data.json
-python create_superuser.py
