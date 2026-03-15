@@ -41,9 +41,9 @@ class ProductSerializer(serializers.ModelSerializer):
         return 0
 
     def get_image(self, obj):
-        if obj.image:
-            return f'/media/{obj.image}'
-        return None
+     if obj.image:
+        return str(obj.image)
+     return None
 
     def get_avg_rating(self, obj):
         reviews = obj.reviews.all()
